@@ -1,5 +1,5 @@
 
-import { AbstractAuthorizationConfigProvider, Application } from '@libreforge/libreforge-framework';
+import { AbstractAuthorizationConfigProvider, AbstractCallbackHandler, Application, SYMBOL_CALLBACK_PROVIDER } from '@libreforge/libreforge-framework';
 import React, { useState } from 'react';
 import pages from './config/application.json'
 import { Container } from 'inversify';
@@ -10,6 +10,8 @@ import { Provider, useDispatch as useReduxDispatch } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
 import { DefaultAuthorizationConfigProvider } from './DefaultAuthorizationConfigProvider';
 import { bindProviders as securityBindProviders } from '@libreforge/librepackage-security-oauth2-google';
+import { CustomStatusCallbackHandler } from 'CustomStatusCallbackHandler';
+import { usePageTitle } from 'hooks/usePageTitle';
 
 /* Redux Store configuration */
 const models = { app };
@@ -27,11 +29,14 @@ const store = init(storeConfig);
 
 const container = new Container();
 container.bind<AbstractAuthorizationConfigProvider>(SYMBOL_AUTHORIZATION_CONFIG_PROVIDER).to(DefaultAuthorizationConfigProvider);
+container.bind<AbstractCallbackHandler>(SYMBOL_CALLBACK_PROVIDER).to(CustomStatusCallbackHandler);
 
-frameworkBindProviders(container);
 securityBindProviders(container);
+frameworkBindProviders(container);
 
 function App() {
+  usePageTitle('Dashboard Demo');
+
   const [selectedPage, setSelectedPage] = useState<string>('init');
 
   window.addEventListener('storage', () => {

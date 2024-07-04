@@ -3,8 +3,8 @@ import { AbstractAuthorizationConfigProvider, AbstractCallbackHandler, Applicati
 import React, { useState } from 'react';
 import pages from './config/application.json'
 import { Container } from 'inversify';
-import { InversifyContainerProviderContext, SYMBOL_AUTHORIZATION_CONFIG_PROVIDER, bindProviders as frameworkBindProviders } from '@libreforge/libreforge-framework';
-import { app } from '@libreforge/libreforge-framework';
+import { app, InversifyContainerProviderContext, SYMBOL_AUTHORIZATION_CONFIG_PROVIDER, bindProviders as frameworkBindProviders } from '@libreforge/libreforge-framework';
+import { bindProviders as componentBindProviders } from '@libreforge/libreforge-framework-react';
 import { RematchDispatch, init } from '@rematch/core';
 import { Provider, useDispatch as useReduxDispatch } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -33,6 +33,7 @@ container.bind<AbstractCallbackHandler>(SYMBOL_CALLBACK_PROVIDER).to(CustomStatu
 
 securityBindProviders(container);
 frameworkBindProviders(container);
+componentBindProviders(container);
 
 function App() {
   usePageTitle('Dashboard Demo');

@@ -1,10 +1,10 @@
 
-import { AbstractAuthorizationConfigProvider, AbstractCallbackHandler, Application, SYMBOL_CALLBACK_PROVIDER } from '@libreforge/libreforge-framework';
+import { AbstractAuthorizationConfigProvider, AbstractCallbackHandler, SYMBOL_CALLBACK_PROVIDER } from '@libreforge/libreforge-framework';
 import React, { useState } from 'react';
 import pages from './config/application.json'
 import { Container } from 'inversify';
 import { app, InversifyContainerProviderContext, SYMBOL_AUTHORIZATION_CONFIG_PROVIDER, bindProviders as frameworkBindProviders } from '@libreforge/libreforge-framework';
-import { bindProviders as componentBindProviders } from '@libreforge/libreforge-framework-react';
+import { Application, bindProviders as componentBindProviders } from '@libreforge/libreforge-framework-react';
 import { RematchDispatch, init } from '@rematch/core';
 import { Provider, useDispatch as useReduxDispatch } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -16,12 +16,12 @@ import { usePageTitle } from 'hooks/usePageTitle';
 /* Redux Store configuration */
 const models = { app };
 export const storeConfig = {
-  models,
-  plugins: [],
+models,
+plugins: [],
 };
 
 export const useDispatch = () => {
-  return useReduxDispatch() as RematchDispatch<typeof models>;
+return useReduxDispatch() as RematchDispatch<typeof models>;
 };
 
 // @ts-ignore
@@ -36,7 +36,7 @@ frameworkBindProviders(container);
 componentBindProviders(container);
 
 function App() {
-  usePageTitle('Dashboard Demo');
+usePageTitle('Dashboard Demo');
 
   const [selectedPage, setSelectedPage] = useState<string>('init');
 

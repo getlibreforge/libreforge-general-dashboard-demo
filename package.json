@@ -8,7 +8,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0", 
     "framer-motion": "^10.16.4",           
-    "@libreforge/libreforge-framework-react": "^1.0.52",
+    "@libreforge/libreforge-framework-react": "^1.0.85",
     "@libreforge/librepackage-security-oauth2-google": "^1.0.15",
     "react-router-dom": "^6.20.1",
     "@rematch/core": "^2.2.0",
